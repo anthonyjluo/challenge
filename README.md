@@ -1,4 +1,4 @@
-# guidebook_challenge
+# challenge
 
 Problem to Solve and Solution:
 The problem is based around finding the maximum of the array when given a shifted sorted list. 
