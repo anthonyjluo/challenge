@@ -7,7 +7,7 @@ value, I searched for an index where array[index] > array[index+1]. This is beca
  an index with this property must be the maximum of the array.
 
 Algorithm Reasoning:
-I chose to use a binary search algorithm to reach a general case of O(log(N)) performance time of finding the maximum, but
+I chose to use a binary search algorithm to reach an amortized case of O(log(N)) performance time of finding the maximum, but
 worst case the algorithm performs at O(N) peformance time due to certain edge cases.
 
 My algorithm finds the middle, and then determines whether to search down the left or right half of a list under certain criteria.
@@ -21,10 +21,16 @@ whether the maximum is on the left or right side of the split. In this case, we 
 We can do this because if array[middle] = array[start], even if array[start] is the maximum, the maximum value will still be present in the
 list at the middle index.
 
-However, in the worst case scenario, we hit this edge case O(N) times, and thus the worst case performance is O(N). 
+However, in the worst case scenario, we hit this edge case O(N) times, and thus the worst case performance is O(N). For example, this would
+occur with the array [5, 5, 5, 5, 5, 5, 5, 5, 5, 6, 5].
+
+There is another edge case where the whole list is shifted, thus making the list a sorted list. In this scenario, no index
+has the property of array[index] > array[index] + 1. My implementation handles this by returning the last element of the list,
+which should hold the maximum, if it can't find an index with this property.
 
 2. Since it's binary search, where the list to be searched is halved on each recursion, the order of growth
-time amortized is O(log(N)), but worst case the order of growth is O(N). 
+time amortized is O(log(N)), but worst case the order of growth is O(N), again due to certain edge cases.
 
 3. For a list of 1 million elements, my current implementation is both O(1) in space and amortized O(log(N)) in time performance-wise.
 My solution also specifically uses a while loop, so there won't be any overflows on the stack caused by too large of a recursion depth.
+Thus, I can't think of a more performant solution to this problem.
